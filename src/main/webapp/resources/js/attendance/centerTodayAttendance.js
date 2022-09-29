@@ -112,8 +112,6 @@ $(function(){
 
 	$(document).ready(function(){
 		$("#searchBtn").on("click",function(){
-			//console.log("검색")
-			//console.log($('#searchText').val());
 			let searchText = $('#searchText').val()
 			nowSearch(1, searchText );	
 		})

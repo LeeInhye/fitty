@@ -17,8 +17,6 @@ public interface AttendanceService {
 	// 출석용
 	Attendance selectInAttendance(Attendance a);
 	
-	// 출석용
-	//Attendance selectOutAttendance(Attendance a);
 	
 	// 퇴근시간, 최종상태 업데이트
 	int updateWorkOutLogOut(Attendance a);

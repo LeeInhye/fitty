@@ -148,7 +148,6 @@ function changeSelect(){
 			  url:"orderByVac.att",
 			 data:{
 			   orderByWorkTime:orderByWorkTime,
-			   //orderByAtt:orderByAtt,
 			   searchText:$("#searchText").val()
 			 },
 			 type:"post",

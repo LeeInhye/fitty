@@ -30,11 +30,7 @@ public class AttendanceDao {
 		int statusResult = sqlSession.update("attendanceMapper.updateAttOutStatus",a);
 		return timeResult + statusResult;
 	}
-	/*
-	public Attendance selectOutAttendance(SqlSessionTemplate sqlSession, Attendance a) {
-		return sqlSession.selectOne("attendanceMapper.selectOutAttendance", a);
-	}
-*/	
+
 	public Attendance selectMyAttendance(SqlSessionTemplate sqlSession, Attendance a) {
 		Attendance att = sqlSession.selectOne("attendanceMapper.selectMyAttendance", a);
 		return sqlSession.selectOne("attendanceMapper.selectMyAttendance", a);

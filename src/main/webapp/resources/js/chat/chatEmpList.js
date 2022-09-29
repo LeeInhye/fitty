@@ -88,8 +88,7 @@ function selectChatRoom(invEmpNo){
 	
 	
 	const empNo = $("#empNoInput").val();
-	//console.log("로그인유저 : " + empNo);
-	//console.log("상대방 : " + invEmpNo);
+
 	
 	$.ajax({
 		    url:"bubbleList.ch",
@@ -99,12 +98,10 @@ function selectChatRoom(invEmpNo){
 			},
 			type:"post",
 			success:function(invMap){
-				//console.log("ddddd")
 				let c = invMap.c;
 				let invC = invMap.invC;
 				let bubbleList = invMap.bubbleList;
-			  // console.log(invMap);
-			   let value = ""
+			    let value = ""
 
 			   // 해줘야 하는것 : 리스트말고 invEmpno, name, empPhoto, grname 객체 하나가 필요함, 즉 리턴할때 map으로 리턴해야함 ㅜㅜ
 			
@@ -128,7 +125,7 @@ function selectChatRoom(invEmpNo){
 						 
 			   } else {
 				   
-				   value +=  /*"<div>"*/ "<div id='chatarea' class='card-header' style='width: 80%; height: 600px; overflow: auto;'>"
+				   value +=  "<div id='chatarea' class='card-header' style='width: 80%; height: 600px; overflow: auto;'>"
 							 +			   "<div id='chatTextArea'>"
 						 for(let i=0; i<bubbleList.length; i++){
 							if(bubbleList[i].empNo === c.empNo){
@@ -164,8 +161,7 @@ function selectChatRoom(invEmpNo){
 						+		   		"</form>"
 						+		   "</div>"
 						+	   "</div>"
-						//console.log(value);
-						console.log("ffff : " + $(".vacDetailDiv").children().next().val());
+
 						$(".vacDetailDiv").html(value);
 			  
 			}
@@ -187,27 +183,23 @@ function selectChatRoom(invEmpNo){
 	})
 	
 	function connect(){
-		//bubbleList.ch
-		//websocket = new SockJS("/fitty/chat-ws");
+
 		websocket = new SockJS("/fitty/chat-ws");
 			//웹 소켓에 이벤트가 발생했을 때 호출될 함수 등록
 			websocket.onopen = onOpen;
 			websocket.onmessage = onMessage;
-			//http://localhost:8765/fitty/chatEcho
+
 	}
 	
 	// ##### 연결 되었습니다!
 	function onOpen(){
-		//id = document.getElementById("id").value;
-		//websocket.send(id + "님과의 대화입니다.");
+
 		console.log("연결됨")
 	}
 	
 	// ##### 메세지 보내기 버튼 클릭!
 	/*
-	document.getElementById("send").addEventListener("click", function() {
-		send();
-	});
+
 	*/
 	function send(){
 
@@ -230,7 +222,6 @@ function selectChatRoom(invEmpNo){
 		photo = document.getElementById("empPhotoInput").value;
 		msg = document.getElementById("message").value;
 
-		//websocket.send(/*css 소스 + */id + ":"+ msg);
 		websocket.send(
 										"<table class='myTable'>"
 								+ 					  "<tr>"
@@ -317,26 +308,8 @@ function selectChatRoom(invEmpNo){
 	}
 	
 	function onMessage(evt){
-		console.log('Info: connection onmessage.');
-	   	console.log("ReceiveMessage:" , evt.data +'\n');
-	   		
-	   	
-		//data= evt.data;
-		//chatTextArea = document.getElementById("chatTextArea");
-		//chatTextArea.innerHTML =  evt.data;
 		$("#chatTextArea").html(  $("#chatTextArea").html() + "<div style='height:20px;'></div>" + evt.data);
 	}
 	
-	// ##### 연결을 해제합니다!
-	/*
-	document.getElementById("exit").addEventListener("click", function() {
-		disconnect();
-	});
-	/*
-	function disconnect(){
-		id = document.getElementById("id").value;
-		websocket.send(id+"님이 퇴장하셨습니다");
-		websocket.close();
-	}
-	*/
+
 	

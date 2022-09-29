@@ -78,10 +78,8 @@ public class EmployeeController {
 			// 넘어온 파일이 있을 경우
 			String saveFilePath = FileUpload.saveFile(uploadFile, session, "resources/profile_images/");
 			e.setEmpPhoto(saveFilePath);
-			//System.out.println(saveFilePath);
 			// session 에 profileImg 가 업데이트된 새 로그인객체 담기!
 			session.setAttribute("e", e);
-			//System.out.println(e);
 			}
 		return e;
 				
@@ -126,20 +124,6 @@ public class EmployeeController {
 		int result = eService.insertEmployee(e);
 		if(result > 0) {
 			// 인서트 되고 1행이 넘어온 상태
-			
-			//근태 초기화 진행
-			/*String thisYear = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
-		    System.out.println(thisYear);
-			int resetStatusB = aService.insertAttendance(e.getEmpNo(), thisYear);
-		    int setWeekDaysX = aService.updateAttendanceStatus(e.getEmpNo(), thisYear);
-		    
-		    if(resetStatusB + setWeekDaysX < 0) {
-		    	session.setAttribute("alertMsg", "❌ 근태초기화에 실패했습니다! ❌");
-				return "redirect:enrollForm.emp";
-		    } else {
-		    	session.setAttribute("alertMsg", "✔ 신규 직원 등록 성공! ✔");
-				return "redirect:centerAtt.att";
-		    }*/
 			session.setAttribute("alertMsg", "✔ 신규 직원 등록 성공! ✔");
 			return "redirect:centerAtt.att";
 		} else {
@@ -183,7 +167,6 @@ public class EmployeeController {
 		if(result > 0) { // 수정 성공
 			
 			// db로부터 갱신된 회원 정보를 다시 조회해와서 session에 담기
-			//Employee updateEmployee = eService.loginEmployee(e);
 			session.setAttribute("loginUser", eService.loginEmployee(e));
 			session.setAttribute("alertMsg", "성공적으로 회원정보 변경되었습니다.");
 			

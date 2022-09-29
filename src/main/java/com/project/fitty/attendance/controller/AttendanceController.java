@@ -81,7 +81,6 @@ public class AttendanceController {
 				case "P" : a.setAttStatus("연장근무"); ; break; // 정상출근
 				default : a.setAttStatus("기본"); break;  // 무단
 			}
-			//System.out.println(a);
 		}
 		return list;
 	}
@@ -93,7 +92,6 @@ public class AttendanceController {
 				case "P" : a.setAttPlusWork("연장근무"); ; break; 
 				default : a.setAttPlusWork("일반근무"); break; 
 			}
-			//System.out.println(a);
 		}
 		return list;
 	}
@@ -102,7 +100,6 @@ public class AttendanceController {
 			String addSqlGrade, String addSqlStatus, String sqlEmpName, String searchFlag,
 			String thisYear, String thisMonth, String thisDay) {
 		int listCount = 0;
-		//System.out.println(addSqlGrade + " | " + addSqlStatus + " | " + sqlEmpName + " | " + searchFlag + " | " + thisYear + " | " + thisMonth + " | " + thisDay);
 		
 		if(thisMonth.length() == 1) {
 			thisMonth = "0" + thisMonth;
@@ -118,7 +115,6 @@ public class AttendanceController {
 		
 		
 		listCount = eService.selectTodaySearchListCount(sqlMap);
-		//System.out.println(listCount);
 		
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
 		
@@ -224,7 +220,6 @@ public class AttendanceController {
 		return mv;
 	}
 	
-	//modifyAtt.att는 ModifyController로 이동함!
 	
 	@ResponseBody
 	@RequestMapping(value="getWorkTimeOneSec.att", produces="application/json; charset=utf-8")
@@ -322,7 +317,6 @@ public class AttendanceController {
 	public String selectAllAttList(@RequestParam(value="cpage", defaultValue="1")int currentPage, HttpSession session, 
 				String orderByGrade, String searchText, String thisMonth, String thisYear) {
 		
-		//System.out.println("orderByGrade : " + orderByGrade + " searchText : " + searchText + " thisMonth : " + thisMonth + " thisYear : " + thisYear);
 		HashMap <String, Object> sqlMap = new HashMap<String, Object>();
 		
 		sqlMap.put("orderByGrade",orderByGrade);
@@ -330,15 +324,12 @@ public class AttendanceController {
 		
 		int listCount =  eService.selectEmpListCount(sqlMap);
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
-		//System.out.println(pi);
 		
 		ArrayList<Employee> empList =  eService.selectEmpList(pi, sqlMap);
 		
 
 		String[] dateStr = getDate();
 		String thisMonthFlag = "";
-		//System.out.println(thisYear.equals(dateStr[0]));
-		//System.out.println(thisMonth.equals(dateStr[2]));
 
 		if(!empList.isEmpty()) {
 			if(thisYear.equals(dateStr[0]) && thisMonth.equals(dateStr[2])) {
@@ -371,34 +362,6 @@ public class AttendanceController {
 		return new Gson().toJson(map);
 	}
 	
-	/*
-	@ResponseBody
-	@RequestMapping(value="otherAttList.att", produces="application/json; charset=utf-8")
-	public String selectOtherAttList(@RequestParam(value="cpage", defaultValue="1")int currentPage, HttpSession session, String thisMonth, String thisYear) {
-		
-		int listCount =  eService.selectEmpListCount();
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
-		
-		ArrayList<Employee> empList =  eService.selectEmpList(pi);
-		
-		if(!empList.isEmpty()) {
-			for(Employee e : empList) {
-				e.setThisYear(thisYear);
-				e.setThisMonth(thisMonth);
-				e.setAttList(aService.selectOtherAttList(e));
-				e.setCountList(aService.selectOtherCountList(e));
-			}
-		}
-		
-		// HashMap 은 넘길 배열이 2개일때만 사용
-		HashMap <String, Object> map = new HashMap<String, Object>();
-		map.put("pi", pi);
-		map.put("empList", empList);
-
-		return new Gson().toJson(map);
-	}
-	
-	*/
 	
 	@RequestMapping("resetAtt.att")
 	public String resetAttendanceUpdate(String afterEmpNoList, HttpSession session) {
@@ -406,7 +369,6 @@ public class AttendanceController {
 		final List<String> empList =  new ArrayList<String>();
 	    Collections.addAll(empList, beforeEmpArray);
 	    
-	    //String thisYear = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy"));
 	    String thisYear = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
 	    int resetStatusNull = 0;
 	    int setWeekDaysX = 0;
@@ -499,7 +461,6 @@ public class AttendanceController {
 	@RequestMapping(value="myMonthAttlist.att", produces="application/json; charset=UTF-8")
 	public String selectMyMonthAttList(Employee e) {
 		String empNo = e.getEmpNo();
-		//System.out.println(empNo);
 		ArrayList<Attendance> list = aService.selectMyMonthAttList(empNo);
 		list = makeAttStatusKr(list);
 		return new Gson().toJson(list); // "[{}, {}, {}, ...]"

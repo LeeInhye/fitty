@@ -15,7 +15,6 @@
  		let interval = setInterval(getWorkTimeOneSec, 1000);
  	} else {
  		getLastWorkTime();
- 		//$("#intervalTime").html("<span style='font-size : 20px;' class='badge rounded-pill bg-label-success'>퇴근완료</span>");
  	}
  	
  	
@@ -206,7 +205,6 @@
  function getWorkTimeOneSec(){
  	
  	let loginUserEmp = $("#loginUserEmp").val();
- 	//console.log("셋인터벌 실행중" + loginUserEmp);
  
  
     $.ajax({
@@ -231,7 +229,6 @@
 
 function getLastWorkTime(){
 	let loginUserEmp = $("#loginUserEmp").val();
- 	//console.log("셋인터벌 실행중" + loginUserEmp);
  
  
     $.ajax({

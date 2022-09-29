@@ -17,7 +17,6 @@
  
  function selectModifyDetail(moAttNo){
 	
- 	//let moAttNo = $(".card-body button[name=simple]").val();
  	console.log(moAttNo);
  	
  
@@ -131,7 +130,6 @@ function selectMoAttForm(){
 				  +					"</div>"
 				  +					"<div class='mt-2 attModifyFormBtnDiv'>"
 				  +						"<button type='submit' class='btn btn-primary me-2'>수정요청</button>"
-				 // +						"<button type='button' class='btn btn-secondary me-2'>목록으로</button>"
 				  +					"</div>"
 				  +					"</form>"
 				  +			"</div>"
@@ -146,56 +144,3 @@ function selectMoAttForm(){
     })
 
 }
-/*
-function insertMoAtt(){
-	let empNo = $("#empNo").val();
-	console.log(empNo);
-	$.ajax({
-        url: "insertMoAttForm.mo",
-		data:{
-		    empNo : empNo
-		},
-        type:"post",
-        success:function(e){
-          	
-          	let value=""
-          	
-          	value +=      "<div class='card mb-4 vacDetailDiv'>"
-				  +				 "<h5 class='card-header' style='margin-bottom:20px; margin-top:20px;'><b> "+ e.empName +"</b> " + e.grName + " 📝 수정요청서 작성</h5>"
-				  +				"<div class='card-body' style='width: 95%;'>"
-				  +					"<form id='formAccountSettings' method='POST' onsubmit='return false'>"
-				  +					"<div class='row'>"
-				  +						"<div class='mb-3 col-md-8'>"
-				  +						"<label for='address' class='form-label' style='font-size: 10px; width:50px'>수정일시</label>"
-				  +                       "<input type='date' class='attDate' name='attDate' >"
-				  +                       "<input type='time' class='form-control' id='attTime' name='attTime'>"
-				  +						"</div>"
-				  +						"<div class='mb-3 col-md-4'>"
-				  +						"<label for='organization' class='form-label'>수정요청선택</label>"
-				  +						"<div style='height : 10px'></div>"
-				  +						"<input class='form-check-input'  type='radio' name='moAttType' value='workIn'>&nbsp출근수정&nbsp&nbsp&nbsp&nbsp&nbsp"
-				  +						"<input class='form-check-input'  type='radio' name='moAttType' value='workOut'>&nbsp퇴근수정&nbsp&nbsp&nbsp&nbsp&nbsp"
-				  +						"</div>"
-				  +						"<div class='mb-3 col-md-12' style='margin-top: 20px;''>"
-				  +						"<label for='reason' class='form-label' >수정 요청사유</label><br>"
-				  +						"<textarea class='reasonArea' autofocus required name='moAttReason'></textarea>"
-				  +						"</div>"
-				  +					"</div>"
-				  +					"<div class='mt-2 attModifyFormBtnDiv'>"
-				  +						"<button type='submit' class='btn btn-primary me-2'>수정요청</button>"
-				 // +						"<button type='button' class='btn btn-secondary me-2'>목록으로</button>"
-				  +					"</div>"
-				  +					"</form>"
-				  +			"</div>"
-				  +		"</div>"
-          	
-          	$(".printModifyDiv").html(value);
-			
-        },
-        error:function(){
-            console.log("근태 수정폼 작성용 ajax통신 실패"); 
-        }
-    })
-
-}
-*/

@@ -50,7 +50,6 @@ public class ModifyAttController {
 	@ResponseBody
 	@RequestMapping(value="modifyDetail.mo", produces="application/json; charset=utf-8")
 	public String selectModifyDetail (String moAttNo) {
-		//	System.out.println("moAttNo : " + moAttNo);
 		ModifyAtt m = mService.selectModifyDetail(moAttNo);
 		if(m.getMoAttType().equals("I")) {
 			m.setMoAttType("출근");
@@ -96,10 +95,7 @@ public class ModifyAttController {
 	
 	@RequestMapping("insertMoAtt.mo")
 	public String insertMoAtt(ModifyAtt m, HttpSession session) {
-		//System.out.println("인서트시 : " + m);
-		//m.setAttDate(m.getMoAttModifyD());
 		m.setAttNo(aService.selectAttNo(m));
-		//System.out.println("AttNo있니? : " + m);
 		int result = mService.insertMoAtt(m);
 		
 		if(result > 0) {
@@ -121,9 +117,6 @@ public class ModifyAttController {
 	
 	@RequestMapping("updateModifyMo.mo")
 	public String updatemodifyAtt(ModifyAtt m, HttpSession session) {
-		//System.out.println("업데이트시 : " + m);
-		//System.out.println(m.getMoAttBack());
-		//System.out.println(m.getMoAttNo());
 		int updateMo = mService.updateModifyAtt(m);
 		m.setAttNo(aService.selectAttNo(m));
 		if(updateMo > 0) {
@@ -138,26 +131,14 @@ public class ModifyAttController {
 		int updateAttOut = 0;
 		
 		m.setMoAttModifyTime(m.getMoAttModifyTime() + ":00");
-		//System.out.println(m.getMoAttModifyTime());
 		if(m.getMoAttType().equals("출근")) {
-			//int updateAttIn = 
 			m.setMoAttType("I");
 			a.setAttIn(m.getMoAttModifyTime());
-			//System.out.println(m);
-			//System.out.println(a);
-			//System.out.println("1번 : " + m.getMoAttModifyTime());
-			//System.out.println("1번m : " + m);
-			//System.out.println("1번a : " + a);
 			updateAttIn = aService.AdminUpdateAttInStatus(a);
-			//System.out.println("결과 : " + a);
 		} else {
 			m.setMoAttType("O");
 			a.setAttOut(m.getMoAttModifyTime());
-			//System.out.println("2번m : " + m);
-			//System.out.println("2번a : " + a);
 			updateAttOut = aService.AdminUpdateAttOutStatus(a);
-			//System.out.println(updateAttOut);
-			//System.out.println("결과 : " + a);
 		}
 		
 		if(updateAttIn > 0 || updateAttOut > 0) {
@@ -177,14 +158,6 @@ public class ModifyAttController {
 		int updateMo = mService.cantUpdateModifyAtt(m);
 		m.setAttNo(aService.selectAttNo(m));
 		if(updateMo > 0) {
-		//System.out.println(m);
-		//Attendance a = new Attendance();
-		//a.setAttNo(m.getAttNo());
-		//a.setAttDate(m.getMoAttModifyD());
-		//a.setEmpNo(m.getEmpNo());
-		//a.setAttStatus(m.getAttStatus());
-		
-		//System.out.println(a);
 		int result = mService.cantUpdateModifyAtt(m);
 		
 		if(result > 0) {

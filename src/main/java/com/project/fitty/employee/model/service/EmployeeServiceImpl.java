@@ -43,17 +43,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public int insertEmployee(Employee e) {
 		return eDao.insertEmployee(e, sqlSession);
 	}
-	/*
-	@Override
-	public ArrayList<Employee> selectEmpList(PageInfo pi) {
-		return eDao.selectEmpList(sqlSession, pi);
-	}
-	
-	@Override
-	public ArrayList<Employee> selectEmpList() {
-		return eDao.selectEmpList(sqlSession);
-	}*/	
-	
 	@Override
 	public int selectVacEmpListCount() {
 		return eDao.selectVacEmpListCount(sqlSession);

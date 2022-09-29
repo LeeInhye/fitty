@@ -46,25 +46,11 @@ public class EmployeeDao {
         } else {
         	String newEmpPhoto = e.getEmpPhoto().substring(0, e.getEmpPhoto().length() - 1);
         	e.setEmpPhoto(newEmpPhoto);
-        	System.out.println(e.getEmpPhoto());
         }
 		return sqlSession.insert("employeeMapper.insertEmployee", e);
 	}
 	
-/*	
-	public ArrayList<Employee> selectEmpList(SqlSessionTemplate sqlSession, PageInfo pi){
-		int limit = pi.getBoardLimit();
-		int offset = (pi.getCurrentPage() - 1) * limit;
-		RowBounds rowBounds = new RowBounds(offset, limit);
-		return  (ArrayList)sqlSession.selectList("employeeMapper.selectEmpList", null, rowBounds);
-	}
-	
-	
-	public ArrayList<Employee> selectEmpList(SqlSessionTemplate sqlSession){
-		return  (ArrayList)sqlSession.selectList("employeeMapper.selectEmpList");
-	}
-	*/
-	
+
 	// 전체 직원리스트 empList
 		public int selectVacEmpListCount(SqlSessionTemplate sqlSession) {
 			return sqlSession.selectOne("employeeMapper.selectVacEmpListCount");

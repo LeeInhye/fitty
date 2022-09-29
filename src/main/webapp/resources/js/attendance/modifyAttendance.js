@@ -38,10 +38,7 @@
  }
  
   function selectModifyDetail(moAttNo){
-	
- 	//let moAttNo = $(".card-body button[name=simple]").val();
- 	console.log(moAttNo);
- 	
+
  
     $.ajax({
         url: "modifyDetail.mo",
@@ -62,7 +59,6 @@
 		    +                      "<thead>"
 		                      
 		    +                       "<tr>"
-			//+                         "<td>조회</td>"
 		    +                         "<td>수정요청일</td>"
 		    +                         "<td>출근시간</td>"
 		    +                         "<td>퇴근시간</td>"
@@ -73,7 +69,6 @@
 		    +                     "</thead>"
 		    +                     "<tbody>"
 		    +                       "<tr>"
-			//+                         "<td>"+ att.moReadFlag +"</td>"
 		    +                         "<td>"+ att.moAttModifyD +"</td>"
 		    +                         "<td>"+ att.attIn +"</td>"
 		    +                         "<td>"+ att.attOut +"</td>"
@@ -86,7 +81,6 @@
 		    +                 "<div class='mb-3 col-md-12 reason' style='height : 450px; padding-top: 7px;'>"
 			+                 	"<input type='hidden' value='" + att.moAttNo + "' name='moAttNo'>"
 			+                 	"<input type='hidden' value='" + att.empNo + "' name='empNo'>"
-		//	+                 	"<input type='hidden' value='" + att.attStatus + "' name='attStatus'>"
 		    +                   "<h5 class='card-header' style='padding : 10px; margin-top:15px;'><b>🧾 " + att.moAttType + "수정사유</b></h5>"
 			+                 	"<input type='hidden' value='" + att.moAttType + "' name='moAttType'>"
 		    +                   "<textarea class='textarea' style='height : 80px' autofocus>" + att.moAttReason + "</textarea>"
@@ -111,7 +105,6 @@
 				+						"<input class='form-check-input'  type='radio' name='attStatus' value='V'>&nbsp휴가&nbsp&nbsp&nbsp&nbsp&nbsp"
 				+						"<input class='form-check-input'  type='radio' name='attStatus' value='P'>&nbsp연장&nbsp&nbsp&nbsp&nbsp&nbsp"
 				+				  "</div>"
-		    //+                     "</div>"
 		    +                   "</div>"
 		    +                   "<h5 class='card-header' style='padding : 10px; margin-top:15px;' ><b>📋 수정의견</b></h5>"
 		    +                   "<textarea class='textarea'style='height : 80px' autofocus required name='moAttBack' style='background-color:#E7E7E7' id='moAttBack'>"+ att.moAttBack +"</textarea>"
@@ -133,12 +126,10 @@
 }
 function okModifyAtt(){
 	$("#formAccountSettings").attr("action", "updateModifyMo.mo");
-	//console.log($("#formAccountSettings").action());
 	document.getElementById('formAccountSettings').submit();
 }
 
 function cantModifyAtt(){
 	$("#formAccountSettings").attr("action", "cantModifyAtt.mo");
-	//console.log($("#formAccountSettings").action());
 	document.getElementById('formAccountSettings').submit();
 }

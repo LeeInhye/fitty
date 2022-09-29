@@ -42,12 +42,7 @@ public class AttendanceServiceImpl implements AttendanceService{
 	public int updateWorkOutLogOut(Attendance a) {
 		return aDao.updateWorkOutLogOut(sqlSession, a);
 	}
-	/*
-	@Override
-	public Attendance selectOutAttendance(Attendance a) {
-		return aDao.selectInAttendance(sqlSession, a);
-	}
-*/
+
 	@Override
 	public Attendance selectMyAttendance(Attendance a) {
 		return aDao.selectMyAttendance(sqlSession, a);
@@ -157,13 +152,11 @@ public class AttendanceServiceImpl implements AttendanceService{
 
 	@Override
 	public int AdminUpdateAttInStatus(Attendance a) {
-		//System.out.println("인실행됨");
 		return aDao.AdminUpdateAttInStatus(sqlSession, a);
 	}
 
 	@Override
 	public int AdminUpdateAttOutStatus(Attendance a) {
-		//System.out.println("아웃실행됨");
 		return aDao.AdminUpdateAttOutStatus(sqlSession, a);
 	}
 
@@ -171,18 +164,7 @@ public class AttendanceServiceImpl implements AttendanceService{
 	public ArrayList<Attendance> selectMyMonthAttList(String empNo) {
 		return aDao.selectmyMonthAttList(sqlSession, empNo);
 	}
-/*
-	@Override
-	public int selectEmpListCount(HashMap<String, Object> sqlMap) {
-		return 0;
-	}
 
-	@Override
-	public ArrayList<Employee> selectEmpList(PageInfo pi, HashMap<String, Object> sqlMap) {
-		return null;
-	}
-
-*/
 
 	
 
