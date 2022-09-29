@@ -17,8 +17,6 @@ public class ChatDao {
 	}
 	
 	public Chat countRoomFlag(SqlSessionTemplate sqlSession, Chat empC) {
-		//System.out.println("다오 : " + empC.getInvEmpNo());
-		//System.out.println("다오 : " + empC.getEmpNo());
 		return sqlSession.selectOne("chatMapper.countRoomFlag", empC);
 	}
 	

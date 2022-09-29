@@ -40,10 +40,6 @@ public class ChatController {
 	@ResponseBody
 	@RequestMapping(value="bubbleList.ch",  produces="application/json; charset=utf-8")
 	public String selectChatRoomOne( String invEmpNo, String empNo, HttpSession session) {
-		//System.out.println("invEmpNo : " + invEmpNo + "  empNo : " + empNo);
-		/*HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("empNo", empNo);
-		map.put("invEmpNo", invEmpNo);*/
 		Chat empC = new Chat();
 		empC.setInvEmpNo(invEmpNo);
 		empC.setEmpNo(empNo);
@@ -54,7 +50,6 @@ public class ChatController {
 		HashMap<String, Object> invMap = new HashMap<String, Object>();
 		
 		if(c == null) {
-			//System.out.println("챗방없음, 인서트");
 			// 채팅방이 없는경우 채팅방을 만들어주고, 초대해줘야함
 			int result = cService.insertChatInviteFirst(empC);
 			
@@ -65,13 +60,9 @@ public class ChatController {
 			}
 		} else {
 			//이미 채팅방이 존재하기때문에 채팅대화내용을 불러오면 됨
-			//System.out.println("버블리스트 서치");
 			bubbleList = cService.selectBubbleList(c);
 			
 		}
-		//System.out.println(bubbleList);
-		//System.out.println(c);
-		//System.out.println(invC);
 		invMap.put("c", c);
 		invMap.put("invC", invC);
 		invMap.put("bubbleList", bubbleList);
@@ -81,9 +72,6 @@ public class ChatController {
 	@ResponseBody
 	@RequestMapping(value="insertBubble.ch",  produces="application/json; charset=utf-8")
 	public String insertBubble(Chat c) {
-		//System.out.println(c.getEmpName());
-	//	System.out.println(c.getBblContent());
-		//System.out.println(c.getChatRoomNo());
 		
 		int result = cService.insertBubble(c);
 		ArrayList<Chat> bubbleList = new ArrayList<>();
