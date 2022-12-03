@@ -1,6 +1,7 @@
 package com.project.fitty.approval.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -255,5 +256,28 @@ public class ApprovalDao {
 	
 	public int updateStorageFile(SqlSessionTemplate sqlSession, ArrayList<File> flist) {
 		return sqlSession.update("approvalMapper.updateStorageFile", flist);
+	}
+	
+	public int selectSearchCount(SqlSessionTemplate sqlSession, String empNo, String category, String keyword) {
+		HashMap<String,String> map = new HashMap<>();
+		map.put("empNo", empNo);
+		map.put("category", category);
+		map.put("keyword", keyword);
+		
+		return sqlSession.selectOne("approvalMapper.selectSearchCount", map);
+	}
+	
+	public ArrayList<Approval> selectSearchList(SqlSessionTemplate sqlSession, PageInfo pi, String empNo, String category, String keyword){
+		HashMap<String,String> map = new HashMap<>();
+		map.put("empNo", empNo);
+		map.put("category", category);
+		map.put("keyword", keyword);
+		
+		int limit = pi.getBoardLimit();
+		int offset = (pi.getCurrentPage() - 1) * limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("approvalMapper.selectSearchList", map, rowBounds);
+		
 	}
 }

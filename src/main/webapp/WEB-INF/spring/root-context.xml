@@ -8,18 +8,18 @@
 	<!-- * dataSource 등록 -->
    <bean class="org.apache.commons.dbcp.BasicDataSource" id="dataSource" destroy-method="close">
       
-      <!--
+      
       <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
       <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
       <property name="username" value="fitty" />
       <property name="password" value="fitty" />
-      -->
       
+      <!--
       <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
       <property name="url" value="jdbc:oracle:thin:@gd1class.iptime.org:8877:xe" />
       <property name="username" value="GDJ49FITTY" />
       <property name="password" value="fitty20220926" />
-      
+      -->
    </bean>
    
    <!-- * sqlSessionFactoryBean 등록 -->

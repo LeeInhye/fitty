@@ -439,6 +439,7 @@
 	              join tb_appr_mem am on (a.appr_no = am.appr_no)
 	              join tb_Emp e on (a.emp_no = e.emp_no)
 	             where am.emp_no = #{empNo}
+	               and a.appr_status in (1,2)
 		        )
 		where complete_count + 1 = appr_level
 		order
@@ -644,27 +645,27 @@
 	<select id="selectMainDraftList" resultMap="approvalResult">
 		select *
 		  from (select appr_enroll_date
-             , appr_doc_type
-             , appr_title
-             , appr_status
-          from tb_approval
-         where appr_status = 2
-           and emp_no = #{empNo})
-       where rownum between 1 and 5
+		             , appr_doc_type
+		             , appr_title
+		             , appr_status
+		          from tb_approval
+		         where appr_status = 2
+		           and emp_no = #{empNo})
+         where rownum between 1 and 5
 	</select>
 	
 	<select id="selectCompleteList" resultMap="approvalResult">
-		 
-		  select appr_enroll_date
-		             , appr_doc_type
-		             , appr_title
-		             , appr_no
-		             , appr_status
-		          from tb_approval
-		         where appr_status = 3
-		           and emp_no = #{empNo}
-		         order
-		            by appr_no desc
+	
+		select appr_enroll_date
+             , appr_doc_type
+     	   	 , appr_title
+             , appr_no
+             , appr_status
+          from tb_approval
+         where appr_status = 3
+           and emp_no = #{empNo}
+         order
+            by appr_no desc
 	</select>
 	
 	<select id="selectMainCompleteList" resultMap="approvalResult">
@@ -737,4 +738,41 @@
 			 , file_re_no = #{apprNo}
 		 where appr_no = #{apprNo}
 	</update>
+	
+	<select id="selectSearchCount" resultType="_int">
+		select
+		       count(*)
+		  from tb_approval
+		 where emp_no = #{empNo}
+		 	<if test="category == 'title'">
+		 		and appr_title
+		 	</if>
+		 	<if test="category == 'number'">
+		 		and appr_no
+		 	   like	'%' || #{keyword} || '%'
+		 	</if>
+	</select>
+	
+	<select id="selectSearchList" resultMap="approvalResult">
+		select 
+		       appr_no
+			 , appr_doc_type
+			 , appr_title
+			 , appr_enroll_date
+			 , appr_status
+			 , appr_comment
+          from tb_approval
+         where emp_no = #{empNo}
+         <choose>
+		 	<when test="category == 'title'">
+		 		and appr_title
+		 	</when>
+		 	<when test="category == 'number'">
+		 		and appr_no
+		 	</when>
+		 </choose>
+		 	   like	'%' || #{keyword} || '%'
+		 order
+		    by appr_enroll_date desc
+	</select>
 </mapper>

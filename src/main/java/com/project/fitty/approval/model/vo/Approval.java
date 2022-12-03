@@ -29,5 +29,9 @@ public class Approval {
 	private String apprDate;
 	private String empName;
 	private String apprLevel;
+	private String category;
+	private String keyword;
+	private String title;
+	private String number;
 
 }

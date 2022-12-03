@@ -98,4 +98,8 @@ public interface ApprovalService {
 	int updateStorageExp(ApprExpense exp);
 	int updateStorageExpDetail(ArrayList<ApprExpDetail> dlist);
 	int updateStorageFile(ArrayList<File> flist);
+	
+	// 검색
+	int selectSearchCount(String empNo, String category, String keyword);
+	ArrayList<Approval> selectSearchList(PageInfo pi, String empNo, String category, String keyword);
 }

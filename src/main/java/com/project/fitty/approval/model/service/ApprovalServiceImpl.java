@@ -267,5 +267,15 @@ public class ApprovalServiceImpl implements ApprovalService{
 		return aDao.updateStorageFile(sqlSession, flist);
 	}
 
+	@Override
+	public int selectSearchCount(String empNo, String category, String keyword) {
+		return aDao.selectSearchCount(sqlSession, empNo, category, keyword);
+	}
+
+	@Override
+	public ArrayList<Approval> selectSearchList(PageInfo pi, String empNo, String category, String keyword) {
+		return aDao.selectSearchList(sqlSession, pi, empNo, category, keyword);
+	}
+
 
 }

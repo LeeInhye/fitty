@@ -73,7 +73,7 @@ public class ApprovalController {
 	public ModelAndView selectList(@RequestParam(value="cpage", defaultValue="1") int currentPage, String empNo, ModelAndView mv) {
 		int listCount = aService.selectListCount(empNo);
 		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
 		ArrayList<Approval> list = aService.selectList(pi, empNo);
 		
 		mv.addObject("pi", pi).addObject("list", list).setViewName("approval/draftListView");
@@ -93,7 +93,7 @@ public class ApprovalController {
 			
 			int listCount = aService.ajaxSelectListCount(ap);
 			
-			PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+			PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
 			ArrayList<Approval> list = aService.ajaxSelectList(pi, ap);
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			map.put("pi", pi);
@@ -118,7 +118,7 @@ public class ApprovalController {
 	public ModelAndView selectstorageList(@RequestParam(value="cpage", defaultValue="1") int currentPage, String empNo, ModelAndView mv) {
 		int listCount = aService.selectStorageListCount(empNo);
 		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
 		ArrayList<Approval> list = aService.selectStorageList(pi, empNo);
 		
 		mv.addObject("pi", pi).addObject("list", list).setViewName("approval/storageListView");
@@ -131,7 +131,7 @@ public class ApprovalController {
 	public ModelAndView selectSignList(@RequestParam(value="cpage", defaultValue="1") int currentPage, String empNo, ModelAndView mv) {
 		int listCount = aService.selectSignListCount(empNo);
 		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
 		ArrayList<Approval> list = aService.selectSignList(pi, empNo);
 		
 		mv.addObject("pi", pi).addObject("list", list).setViewName("approval/signListView");
@@ -151,7 +151,7 @@ public class ApprovalController {
 			
 			int listCount = aService.ajaxSelectListCount(ap);
 			
-			PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+			PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
 			ArrayList<Approval> list = aService.ajaxSelectSignList(pi, ap);
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			map.put("pi", pi);
@@ -160,7 +160,7 @@ public class ApprovalController {
 			return new Gson().toJson(map);
 		}else {
 			int listCount = aService.selectListCount(empNo);
-			PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+			PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
 			ArrayList<Approval> list = aService.selectSignList(pi, empNo);
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			map.put("pi", pi);
@@ -326,7 +326,7 @@ public class ApprovalController {
 	public ModelAndView scheduleList(@RequestParam(value="cpage", defaultValue="1") int currentPage, String empNo, ModelAndView mv) {
 		int listCount = aService.selectScheduleListCount(empNo);
 		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
 		ArrayList<Approval> list = aService.selectScheduleList(pi, empNo);
 		
 		mv.addObject("pi", pi).addObject("list", list).setViewName("approval/apprScheduleListView");
@@ -339,7 +339,7 @@ public class ApprovalController {
 	public ModelAndView waitingList(@RequestParam(value="cpage", defaultValue="1") int currentPage, String empNo, ModelAndView mv) {
 		int listCount = aService.selectWaitingListCount(empNo);
 		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
 		ArrayList<Approval> list = aService.selectWaitingList(pi, empNo);
 		
 		mv.addObject("pi", pi).addObject("list", list).setViewName("approval/apprWaitingListView");
@@ -577,5 +577,59 @@ public class ApprovalController {
 				return "common/errorPage";
 			}
 		}
+	}
+	
+	// 기안문서함 검색
+	@ResponseBody
+	@RequestMapping("search.ap")
+	public ModelAndView searchList(ModelAndView mv, @RequestParam(value="cpage", defaultValue="1") int currentPage, String empNo, String keyword, String category) {
+		int listCount = aService.selectSearchCount(empNo, keyword, category);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
+		
+		ArrayList<Approval> list = aService.selectSearchList(pi, empNo, category, keyword);
+		
+		mv.addObject("pi", pi)
+		  .addObject("list", list)
+		  .addObject("category", category)
+		  .addObject("keyword", keyword)
+		  .setViewName("approval/draftListView");
+		
+		return mv;
+	}
+	
+	// 임시저장함 검색
+	@ResponseBody
+	@RequestMapping("searchStorage.ap")
+	public ModelAndView searchStorageList(ModelAndView mv, @RequestParam(value="cpage", defaultValue="1") int currentPage, String empNo, String keyword, String category) {
+		int listCount = aService.selectSearchCount(empNo, keyword, category);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
+		
+		ArrayList<Approval> list = aService.selectSearchList(pi, empNo, category, keyword);
+		
+		mv.addObject("pi", pi)
+		  .addObject("list", list)
+		  .addObject("category", category)
+		  .addObject("keyword", keyword)
+		  .setViewName("approval/storageListView");
+		
+		return mv;
+	}
+	
+	// 결재문서함 검색
+	@ResponseBody
+	@RequestMapping("searchSign.ap")
+	public ModelAndView searchSignList(ModelAndView mv, @RequestParam(value="cpage", defaultValue="1") int currentPage, String empNo, String keyword, String category) {
+		int listCount = aService.selectSearchCount(empNo, keyword, category);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
+		
+		ArrayList<Approval> list = aService.selectSearchList(pi, empNo, category, keyword);
+		
+		mv.addObject("pi", pi)
+		  .addObject("list", list)
+		  .addObject("category", category)
+		  .addObject("keyword", keyword)
+		  .setViewName("approval/signListView");
+		
+		return mv;
 	}
 }
