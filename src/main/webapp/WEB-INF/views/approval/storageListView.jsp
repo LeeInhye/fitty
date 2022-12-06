@@ -85,13 +85,8 @@
 		
 		<div class="main">
 	    	<h4 style="color:rgb(50, 50, 50);">임시 저장함</h4><br>
-          	<button id="del-btn">
-	        	<i class='bx bxs-trash'></i>
-	       		문서 삭제
-          	</button><br><br>
 			<table id="dTable" align="center">
             	<tr style="background:rgb(231, 231, 255)">
-	           		<th><input type="checkbox" class="check"></th>
 	              	<th>기안일</th>
 	              	<th>결재양식</th>
 	              	<th width="35%;">제목</th>
@@ -104,7 +99,6 @@
 		      		<c:when test="${ not empty list }">
 		            	<c:forEach var="s" items="${ list }">		            	
 				            <tr>
-				            	<td><input type="checkbox" class="check"></td>
 				              	<td>${ s.apprEnrollDate }<input type="hidden" name="apprDocType" class="apprDocType" value="${ s.apprDocType }"></td>
 				              	<c:choose>
 					              	<c:when test="${ s.apprDocType eq 1 }">

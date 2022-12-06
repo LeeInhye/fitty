@@ -276,6 +276,26 @@ public class ApprovalServiceImpl implements ApprovalService{
 	public ArrayList<Approval> selectSearchList(PageInfo pi, String empNo, String category, String keyword) {
 		return aDao.selectSearchList(sqlSession, pi, empNo, category, keyword);
 	}
+	
+	@Override
+	public int selectStorageSearchCount(String empNo, String category, String keyword) {
+		return aDao.selectStorageSearchCount(sqlSession, empNo, category, keyword);
+	}
+
+	@Override
+	public ArrayList<Approval> selectStorageSearchList(PageInfo pi, String empNo, String category, String keyword) {
+		return aDao.selectStorageSearchList(sqlSession, pi, empNo, category, keyword);
+	}
+	
+	@Override
+	public int selectSignSearchCount(String empNo, String category, String keyword) {
+		return aDao.selectSignSearchCount(sqlSession, empNo, category, keyword);
+	}
+
+	@Override
+	public ArrayList<Approval> selectSignSearchList(PageInfo pi, String empNo, String category, String keyword) {
+		return aDao.selectSignSearchList(sqlSession, pi, empNo, category, keyword);
+	}
 
 
 }

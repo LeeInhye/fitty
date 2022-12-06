@@ -280,4 +280,50 @@ public class ApprovalDao {
 		return (ArrayList)sqlSession.selectList("approvalMapper.selectSearchList", map, rowBounds);
 		
 	}
+	
+	public int selectStorageSearchCount(SqlSessionTemplate sqlSession, String empNo, String category, String keyword) {
+		HashMap<String,String> map = new HashMap<>();
+		map.put("empNo", empNo);
+		map.put("category", category);
+		map.put("keyword", keyword);
+		
+		return sqlSession.selectOne("approvalMapper.selectStorageSearchCount", map);
+	}
+	
+	public ArrayList<Approval> selectStorageSearchList(SqlSessionTemplate sqlSession, PageInfo pi, String empNo, String category, String keyword){
+		HashMap<String,String> map = new HashMap<>();
+		map.put("empNo", empNo);
+		map.put("category", category);
+		map.put("keyword", keyword);
+		
+		int limit = pi.getBoardLimit();
+		int offset = (pi.getCurrentPage() - 1) * limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("approvalMapper.selectStorageSearchList", map, rowBounds);
+		
+	}
+	
+	public int selectSignSearchCount(SqlSessionTemplate sqlSession, String empNo, String category, String keyword) {
+		HashMap<String,String> map = new HashMap<>();
+		map.put("empNo", empNo);
+		map.put("category", category);
+		map.put("keyword", keyword);
+		
+		return sqlSession.selectOne("approvalMapper.selectSignSearchCount", map);
+	}
+	
+	public ArrayList<Approval> selectSignSearchList(SqlSessionTemplate sqlSession, PageInfo pi, String empNo, String category, String keyword){
+		HashMap<String,String> map = new HashMap<>();
+		map.put("empNo", empNo);
+		map.put("category", category);
+		map.put("keyword", keyword);
+		
+		int limit = pi.getBoardLimit();
+		int offset = (pi.getCurrentPage() - 1) * limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("approvalMapper.selectSignSearchList", map, rowBounds);
+		
+	}
 }

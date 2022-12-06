@@ -91,7 +91,7 @@ public interface ApprovalService {
 	ArrayList<Approval> selectMainDraftList(String empNo);
 	ArrayList<Approval> selectMainCompleteList(String empNo);
 	
-	// 임시저장문서기안
+	// 임시저장 문서기안
 	int updateStorage(Approval ap);
 	int updateStorageVct(ApprVacation vct);
 	int updateStorageOvt(ApprOvertime ovt);
@@ -99,7 +99,15 @@ public interface ApprovalService {
 	int updateStorageExpDetail(ArrayList<ApprExpDetail> dlist);
 	int updateStorageFile(ArrayList<File> flist);
 	
-	// 검색
+	// 기안문서함 검색
 	int selectSearchCount(String empNo, String category, String keyword);
 	ArrayList<Approval> selectSearchList(PageInfo pi, String empNo, String category, String keyword);
+	
+	// 임시저장함 검색
+	int selectStorageSearchCount(String empNo, String category, String keyword);
+	ArrayList<Approval> selectStorageSearchList(PageInfo pi, String empNo, String category, String keyword);
+	
+	// 결재문서함 검색
+	int selectSignSearchCount(String empNo, String category, String keyword);
+	ArrayList<Approval> selectSignSearchList(PageInfo pi, String empNo, String category, String keyword);
 }

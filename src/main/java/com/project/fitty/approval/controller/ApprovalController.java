@@ -601,10 +601,10 @@ public class ApprovalController {
 	@ResponseBody
 	@RequestMapping("searchStorage.ap")
 	public ModelAndView searchStorageList(ModelAndView mv, @RequestParam(value="cpage", defaultValue="1") int currentPage, String empNo, String keyword, String category) {
-		int listCount = aService.selectSearchCount(empNo, keyword, category);
+		int listCount = aService.selectStorageSearchCount(empNo, keyword, category);
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
 		
-		ArrayList<Approval> list = aService.selectSearchList(pi, empNo, category, keyword);
+		ArrayList<Approval> list = aService.selectStorageSearchList(pi, empNo, category, keyword);
 		
 		mv.addObject("pi", pi)
 		  .addObject("list", list)
@@ -619,10 +619,10 @@ public class ApprovalController {
 	@ResponseBody
 	@RequestMapping("searchSign.ap")
 	public ModelAndView searchSignList(ModelAndView mv, @RequestParam(value="cpage", defaultValue="1") int currentPage, String empNo, String keyword, String category) {
-		int listCount = aService.selectSearchCount(empNo, keyword, category);
+		int listCount = aService.selectSignSearchCount(empNo, keyword, category);
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
 		
-		ArrayList<Approval> list = aService.selectSearchList(pi, empNo, category, keyword);
+		ArrayList<Approval> list = aService.selectSignSearchList(pi, empNo, category, keyword);
 		
 		mv.addObject("pi", pi)
 		  .addObject("list", list)

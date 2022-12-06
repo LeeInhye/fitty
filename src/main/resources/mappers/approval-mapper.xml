@@ -745,12 +745,13 @@
 		  from tb_approval
 		 where emp_no = #{empNo}
 		 	<if test="category == 'title'">
-		 		and appr_title
+		 	   and appr_title
 		 	</if>
 		 	<if test="category == 'number'">
-		 		and appr_no
+		 	   and appr_no
 		 	   like	'%' || #{keyword} || '%'
 		 	</if>
+		 	   and appr_storage = 'N'
 	</select>
 	
 	<select id="selectSearchList" resultMap="approvalResult">
@@ -772,6 +773,87 @@
 		 	</when>
 		 </choose>
 		 	   like	'%' || #{keyword} || '%'
+		 	   and appr_storage = 'N'
+		 order
+		    by appr_enroll_date desc
+	</select>
+	
+	<select id="selectStorageSearchCount" resultType="_int">
+		select
+		       count(*)
+		  from tb_approval
+		 where emp_no = #{empNo}
+		 	<if test="category == 'title'">
+		 	   and appr_title
+		 	</if>
+		 	<if test="category == 'number'">
+		 	   and appr_no
+		 	   like	'%' || #{keyword} || '%'
+		 	</if>
+		 	   and appr_storage = 'Y'
+	</select>
+	
+	<select id="selectStorageSearchList" resultMap="approvalResult">
+		select 
+		       appr_no
+			 , appr_doc_type
+			 , appr_title
+			 , appr_enroll_date
+			 , appr_status
+			 , appr_comment
+          from tb_approval
+         where emp_no = #{empNo}
+         <choose>
+		 	<when test="category == 'title'">
+		 		and appr_title
+		 	</when>
+		 	<when test="category == 'number'">
+		 		and appr_no
+		 	</when>
+		 </choose>
+		 	   like	'%' || #{keyword} || '%'
+		 	   and appr_storage = 'Y'
+		 order
+		    by appr_enroll_date desc
+	</select>
+	
+	<select id="selectSignSearchCount" resultType="_int">
+		select
+		       count(*)
+		  from tb_approval a
+		  join tb_appr_mem m on (a.appr_no = m.appr_no)
+		 where m.emp_no = #{empNo}
+		 	<if test="category == 'title'">
+		 	   and appr_title
+		 	</if>
+		 	<if test="category == 'number'">
+		 	   and appr_no
+		 	   like	'%' || #{keyword} || '%'
+		 	</if>
+		 	   and m.appr_status is not null
+	</select>
+	
+	<select id="selectSignSearchList" resultMap="approvalResult">
+		select 
+		       a.appr_no
+			 , appr_doc_type
+			 , appr_title
+			 , appr_enroll_date
+			 , a.appr_status
+			 , a.appr_comment
+          from tb_approval a
+          join tb_appr_mem m on (a.appr_no = m.appr_no)
+         where m.emp_no = #{empNo}
+         <choose>
+		 	<when test="category == 'title'">
+		 		and appr_title
+		 	</when>
+		 	<when test="category == 'number'">
+		 		and appr_no
+		 	</when>
+		 </choose>
+		 	   like	'%' || #{keyword} || '%'
+		 	   and m.appr_status is not null
 		 order
 		    by appr_enroll_date desc
 	</select>
